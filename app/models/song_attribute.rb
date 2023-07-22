@@ -9,17 +9,18 @@
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  song_id    :bigint           not null
+#  show_id    :bigint           not null
 #
 # Indexes
 #
 #  index_song_attributes_on_ancestry  (ancestry)
-#  index_song_attributes_on_song_id   (song_id)
+#  index_song_attributes_on_show_id   (show_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (song_id => songs.id)
+#  fk_rails_...  (show_id => shows.id)
 #
 class SongAttribute < ApplicationRecord
-  belongs_to :song
+  belongs_to :show
+  has_many :cells
 end

@@ -17,8 +17,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_194601) do
   create_table "cells", force: :cascade do |t|
     t.text "content"
     t.bigint "song_attribute_id", null: false
+    t.bigint "show_id", null: false
+    t.string "ancestry", null: false, collation: "C"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_cells_on_ancestry"
+    t.index ["show_id"], name: "index_cells_on_show_id"
     t.index ["song_attribute_id"], name: "index_cells_on_song_attribute_id"
   end
 
@@ -37,12 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_194601) do
     t.string "title"
     t.string "artist"
     t.integer "year"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shows_on_user_id"
   end
 
   create_table "song_attributes", force: :cascade do |t|
-    t.bigint "song_id", null: false
+    t.bigint "show_id", null: false
     t.string "title"
     t.integer "position"
     t.string "ancestry", null: false, collation: "C"
@@ -50,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_194601) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_song_attributes_on_ancestry"
-    t.index ["song_id"], name: "index_song_attributes_on_song_id"
+    t.index ["show_id"], name: "index_song_attributes_on_show_id"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -70,15 +76,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_194601) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cells", "shows"
   add_foreign_key "cells", "song_attributes"
   add_foreign_key "show_users", "shows"
   add_foreign_key "show_users", "users"
-  add_foreign_key "song_attributes", "songs"
+  add_foreign_key "shows", "users"
+  add_foreign_key "song_attributes", "shows"
   add_foreign_key "songs", "shows"
 end

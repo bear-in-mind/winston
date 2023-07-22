@@ -1,7 +1,7 @@
 class CreateSongAttributes < ActiveRecord::Migration[7.0]
   def change
     create_table :song_attributes do |t|
-      t.references :song, null: false, foreign_key: true
+      t.references :show, null: false, foreign_key: true
       t.string :title
       t.integer :position
       t.string "ancestry", collation: 'C', null: false

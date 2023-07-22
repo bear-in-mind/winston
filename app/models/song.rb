@@ -21,6 +21,7 @@
 #
 class Song < ApplicationRecord
   belongs_to :show
+  has_many :cells
 
   DEFAULT_ATTRIBUTES = %w[length tempo].freeze
 end
