@@ -17,13 +17,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_194601) do
   create_table "cells", force: :cascade do |t|
     t.text "content"
     t.bigint "song_attribute_id", null: false
-    t.bigint "show_id", null: false
+    t.bigint "song_id", null: false
     t.string "ancestry", null: false, collation: "C"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_cells_on_ancestry"
-    t.index ["show_id"], name: "index_cells_on_show_id"
     t.index ["song_attribute_id"], name: "index_cells_on_song_attribute_id"
+    t.index ["song_id"], name: "index_cells_on_song_id"
   end
 
   create_table "show_users", force: :cascade do |t|
@@ -83,8 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_194601) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "cells", "shows"
   add_foreign_key "cells", "song_attributes"
+  add_foreign_key "cells", "songs"
   add_foreign_key "show_users", "shows"
   add_foreign_key "show_users", "users"
   add_foreign_key "shows", "users"

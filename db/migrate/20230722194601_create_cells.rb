@@ -3,7 +3,7 @@ class CreateCells < ActiveRecord::Migration[7.0]
     create_table :cells do |t|
       t.text :content
       t.references :song_attribute, null: false, foreign_key: true
-      t.references :show, null: false, foreign_key: true
+      t.references :song, null: false, foreign_key: true
       t.string "ancestry", collation: 'C', null: false
       t.index "ancestry"
 

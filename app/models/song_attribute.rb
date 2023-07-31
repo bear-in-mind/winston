@@ -21,6 +21,8 @@
 #  fk_rails_...  (show_id => shows.id)
 #
 class SongAttribute < ApplicationRecord
+  has_ancestry
+
   belongs_to :show
-  has_many :cells
+  has_many :cells, dependent: :destroy
 end

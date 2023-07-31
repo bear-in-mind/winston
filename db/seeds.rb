@@ -24,7 +24,7 @@ end
 lengths = ["3:45", "2:49", "8:00", "4:59", "4:30"]
 tempos = (75..135).to_a
 keys = ("A".."G").to_a
-songs.each do |song|
+Song.all.each do |song|
   SongAttribute.find_by(title: "length").cells.create(content: lengths.sample, song: song)
   SongAttribute.find_by(title: "tempo").cells.create(content: tempos.sample, song: song)
   SongAttribute.find_by(title: "key").cells.create(content: keys.sample, song: song)

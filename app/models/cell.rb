@@ -7,7 +7,7 @@
 #  content           :text
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  show_id           :bigint           not null
+#  song_id           :bigint           not null
 #  song_attribute_id :bigint           not null
 #
 # Indexes
@@ -22,5 +22,8 @@
 #  fk_rails_...  (song_attribute_id => song_attributes.id)
 #
 class Cell < ApplicationRecord
+  has_ancestry
+
+  belongs_to :song
   belongs_to :song_attribute
 end

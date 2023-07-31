@@ -20,6 +20,8 @@
 #  fk_rails_...  (show_id => shows.id)
 #
 class Song < ApplicationRecord
+  has_ancestry
+
   belongs_to :show
   has_many :cells
 
